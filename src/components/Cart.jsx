@@ -29,6 +29,7 @@ const Cart = () => {
                 <h3 className="text-gray-800 font-semibold">{item.title}</h3>
                 <p className="text-gray-600">${item.price.toFixed(2)}</p>
               </div>
+              <div className='mx-4'>{item.quantity}</div>
               <button
                 className="text-red-500 hover:text-red-700"
                 onClick={() => dispatch(removefromCart(item.id))}

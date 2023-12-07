@@ -1,5 +1,5 @@
 import {useSelector, useDispatch} from 'react-redux';
-import ProductCard from '../cards/PrductCard'
+import ProductCard from '../components/cards/PrductCard';
 
 const Men = () => {
   const data = useSelector((state) => state.items);

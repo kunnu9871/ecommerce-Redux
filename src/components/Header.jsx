@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { NavLink } from 'react-router-dom';
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 
 const navigation = [
@@ -20,7 +20,7 @@ function classNames(...classes) {
 
 
 export default function Example() {
-    const cartItem= useSelector((state)=>state.cartItems)
+    const cartItem = useSelector((state) => state.cartItems)
     return (
         <Disclosure as="nav" className="bg-gray-800">
             {({ open }) => (
@@ -63,14 +63,36 @@ export default function Example() {
                                     </div>
                                 </div>
                             </div>
+                            {/* -----------Login & signUp----------------------- */}
+                            <div className="flex space-x-4">
+                                <NavLink to='/SignUp'>
+                                    <button
+                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                    // onClick={onSignin}
+                                    >
+                                        Sign Up
+                                    </button>
+                                </NavLink>
+                                <NavLink to='/Login'>
+                                    <button
+                                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                                    // onClick={onLogin}
+                                    >
+                                        Log In
+                                    </button>
+                                </NavLink>
+                            </div>
+                            {/* -----------Login & signUp----------------------- */}
+
+
                             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                                 <button
                                     type="button"
                                     className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                                 > <NavLink to='/Cart'>
-                                    <span className="absolute -inset-1.5" />
-                                    <span className='absolute bg-red-500 px-1 rounded-md bottom-5'>{cartItem.length}</span>
-                                    <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+                                        <span className="absolute -inset-1.5" />
+                                        <span className='absolute bg-red-500 px-1 rounded-md bottom-5'>0</span>
+                                        <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
                                     </NavLink>
                                 </button>
 

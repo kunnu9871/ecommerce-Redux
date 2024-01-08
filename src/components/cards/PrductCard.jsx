@@ -1,12 +1,13 @@
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../app/features/productSlice";
 
-const ProductCard = ({id, image, price, title }) => {
+const ProductCard = ({productData}) => {
+  const {id, image, price, title } = productData
   const dispatch = useDispatch()
   return (
     <div className="bg-white p-6 rounded-lg shadow-md border-2">
       <img
-        className="w-auto h-48 object-cover mb-4 m-auto"
+        className="w-auto h-48 mb-4 m-auto"
         src={image}
         alt="Product"
       />
@@ -17,7 +18,7 @@ const ProductCard = ({id, image, price, title }) => {
       <div className="mt-4 flex justify-between items-center">
         <span className="text-blue-600 font-semibold">₹ {price}</span>
         <button 
-          onClick={()=>dispatch(addToCart({id, image, price, title }))}
+          onClick={()=>dispatch(addToCart(productData))}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Add to Cart
         </button>

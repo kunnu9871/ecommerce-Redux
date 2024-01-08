@@ -1,19 +1,6 @@
 import { useState } from "react";
 import { logInApi } from "../api/Api";
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
+
 
 const LogIn = () => {
   const [formData, setFormData] = useState();

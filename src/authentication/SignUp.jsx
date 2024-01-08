@@ -1,54 +1,43 @@
 import { useState } from "react";
 import { signUpApi } from "../api/Api";
-import {useNavigate} from 'react-router-dom';
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import { signUp } from "../app/features/authSlice";
 
 const SignUp = () => {
-  const navigate= useNavigate()
-  const [formData, setFormData]= useState({
-    fullName :"",
-    email:"",
-    password:""
+  const selector = useSelector((state) => state.auth.status);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
+
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
   });
 
-  const handleChange = (event)=>{
+  const handleChange = (event) => {
     setFormData({
-      ...formData, [event.target.name]: event.target.value
-    })
-    
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
   };
-  const onSubmit = async (event)=>{
-    event.preventDefault(); 
-    console.log('request sent')
-    const serRes= await signUpApi(formData)
-    console.log(serRes)
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    const serRes = await signUpApi(formData);
+    // console.log(serRes);
     setFormData({
-      fullName :"",
-      email:"",
-      password:""
-    })
-    if(serRes.status === 'sucess'){
-      console.log('server responded')
-      navigate("/"); 
+      fullName: "",
+      email: "",
+      password: "",
+    });
+    if (serRes.status === true) {
+      dispatch(signUp(serRes))
+      navigate('/')
     }
   };
 
-
-  return (
+  return (    
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -59,7 +48,7 @@ const SignUp = () => {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" method="POST">
-          <div>
+            <div>
               <label
                 htmlFor="email"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -68,12 +57,12 @@ const SignUp = () => {
               </label>
               <div className="mt-2">
                 <input
+                  required
                   onChange={handleChange}
                   value={formData.fullName}
                   id="name"
                   name="fullName"
                   type="text"
-                  required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -88,13 +77,13 @@ const SignUp = () => {
               </label>
               <div className="mt-2">
                 <input
+                  required
                   onChange={handleChange}
                   value={formData.email}
                   id="email"
                   name="email"
                   type="email"
                   autoComplete="email"
-                  required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -111,13 +100,13 @@ const SignUp = () => {
               </div>
               <div className="mt-2">
                 <input
+                  required
                   onChange={handleChange}
                   value={formData.password}
                   id="password"
                   name="password"
                   type="password"
                   autoComplete="current-password"
-                  required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>

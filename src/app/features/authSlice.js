@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { useEffect } from "react";
+import { hasStorage } from "../../utils/storage";
 
 const initialState = {
   status: false,
   userDetail: null,
 };
-
 
 
 const authSlice = createSlice({
@@ -19,6 +20,11 @@ const authSlice = createSlice({
       console.log(state.userDetail);
     },
 
+    logIn: (state, actions) => {
+      state.status = true;
+      state.userDetail = actions.payload
+    },
+
     logOut: (state) => {
       state.status = false;
       state.userDetail = null;
@@ -27,4 +33,4 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const { signUp, logOut } = authSlice.actions;
+export const { signUp, logIn, logOut } = authSlice.actions;

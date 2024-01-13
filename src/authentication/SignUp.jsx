@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { signUpApi } from "../api/Api";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import { signUp } from "../app/features/authSlice";
 
 const SignUp = () => {
   const selector = useSelector((state) => state.auth.status);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -32,12 +31,12 @@ const SignUp = () => {
       password: "",
     });
     if (serRes.status === true) {
-      dispatch(signUp(serRes))
-      navigate('/')
+      dispatch(signUp(serRes));
+      navigate("/");
     }
   };
 
-  return (    
+  return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -116,7 +115,10 @@ const SignUp = () => {
               <button
                 type="submit"
                 onClick={onSubmit}
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 
+                text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 
+                focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 
+                focus-visible:outline-indigo-600"
               >
                 Sign up
               </button>

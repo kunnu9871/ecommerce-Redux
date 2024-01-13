@@ -1,13 +1,9 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import {
-  Bars3Icon,
-  ShoppingCartIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import {Bars3Icon,ShoppingCartIcon,XMarkIcon} from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { hasStorage } from "../utils/storage";
 
 
 const navigation = [
@@ -27,9 +23,9 @@ const logOutHandler = ()=>{
 };
 
 export default function Example() {
-  const selector= useSelector(state => state.auth.status);
+  const selector= useSelector(state => state.auth.userDetail);
   const cartItem = useSelector((state) => state.products.cartItems);
-  console.log(selector);
+  // console.log(selector);
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -79,7 +75,7 @@ export default function Example() {
                 </div>
               </div>
               {/* -----------Login & signUp----------------------- */}
-              {!selector && <div className="flex space-x-4">
+              {!hasStorage() && <div className="flex space-x-4">
                 <NavLink to="/SignUp">
                   <button
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
@@ -115,7 +111,7 @@ export default function Example() {
                 </button>
 
                 {/* Profile dropdown */}
-                {selector && <Menu as="div" className="relative ml-3">
+                {hasStorage() && <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="absolute -inset-1.5" />
